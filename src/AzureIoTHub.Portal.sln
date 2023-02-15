@@ -69,6 +69,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureIoTHub.Portal.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureIoTHub.Portal.Crosscutting", "AzureIoTHub.Portal.Crosscutting\AzureIoTHub.Portal.Crosscutting.csproj", "{3523EAFD-81F3-4FC3-BC49-65D3ECE94E4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureIoTHub.Portal.Tests.E2E", "..\AzureIoTHub.Portal.Tests.E2E\AzureIoTHub.Portal.Tests.E2E.csproj", "{3A6C3067-A0E0-489C-887E-AF945CB8C1F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{3523EAFD-81F3-4FC3-BC49-65D3ECE94E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3523EAFD-81F3-4FC3-BC49-65D3ECE94E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3523EAFD-81F3-4FC3-BC49-65D3ECE94E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A6C3067-A0E0-489C-887E-AF945CB8C1F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A6C3067-A0E0-489C-887E-AF945CB8C1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A6C3067-A0E0-489C-887E-AF945CB8C1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A6C3067-A0E0-489C-887E-AF945CB8C1F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
