@@ -7,6 +7,7 @@ namespace TesteE2E
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
+    using OpenQA.Selenium.Support.UI;
 
     public class DeleteDevice
     {
