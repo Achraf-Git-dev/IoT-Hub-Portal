@@ -15,7 +15,10 @@ namespace TesteE2E
         [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
+            var options = new ChromeOptions();
+            options.AddArguments("--headless");
+            new DriverManager().SetUpDriver(new ChromeConfig());
+            driver = new ChromeDriver(options);
         }
 
         [Test]
