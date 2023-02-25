@@ -24,6 +24,9 @@ jobs:
       run: dotnet restore AzureIoTHub.Portal.sln 
       working-directory: src/
 
+    - name: Restore NuGet packages
+      run: dotnet restore
+
     - name: Build
       run: dotnet build AzureIoTHub.Portal.sln --no-restore -p:ClientAssetsRestoreCommand="npm ci"
       working-directory: src/
