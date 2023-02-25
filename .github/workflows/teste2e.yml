@@ -16,6 +16,7 @@ jobs:
         
     - name: Build project
       run: dotnet build --configuration Release
+      working-directory: src/
 
     - name: Run E2E tests
       run: dotnet test --no-build AzureIoTHub.Portal.Tests.E2E.csproj
