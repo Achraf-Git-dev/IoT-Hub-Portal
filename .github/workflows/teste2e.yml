@@ -45,4 +45,4 @@ jobs:
 
     - name: Run E2E tests
       run: dotnet test --no-build AzureIoTHub.Portal.Tests.E2E.csproj
-      working-directory: src/
+      working-directory: AzureIoTHub.Portal.Tests.E2E/
