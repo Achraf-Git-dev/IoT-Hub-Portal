@@ -21,7 +21,7 @@ namespace TesteE2E
         [Test]
         public void AddDeviceTest()
         {
-            driver.Navigate().GoToUrl("https://localhost:8001/");
+            driver.Navigate().GoToUrl("https://cgigeiotdemoportal.azurewebsites.net/");
 
             System.Threading.Thread.Sleep(10000);
 
