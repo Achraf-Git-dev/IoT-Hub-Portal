@@ -1,1 +1,22 @@
+name: E2E_Tests
 
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/setup-dotnet@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-versions: 7.0.x
+        
+    - name: Build project
+      run: dotnet build --configuration Release
+
+    - name: Run E2E tests
+      run: dotnet test --no-build AzureIoTHub.Portal.Tests.E2E.csproj
+      working-directory: src/
