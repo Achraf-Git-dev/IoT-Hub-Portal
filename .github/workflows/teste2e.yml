@@ -26,22 +26,19 @@ jobs:
 
     - name: Restore NuGet packages
       run: dotnet restore
-      working-directory: AzureIoTHub.Portal.Tests.E2E
-
-    - name: Build
-      run: dotnet build AzureIoTHub.Portal.sln --no-restore -p:ClientAssetsRestoreCommand="npm ci"
-      working-directory: src/
+      working-directory: AzureIoTHub.Portal.Tests.E2E/
+      
+    - name: Install NUnit
+      run: dotnet add package NUnit
+      working-directory: AzureIoTHub.Portal.Tests.E2E/
+      
+    - name: Install Selenium NuGet package
+      run: dotnet add package Selenium.WebDriver
+      working-directory: AzureIoTHub.Portal.Tests.E2E/
     
-    - name: Generate Open API documentation
-      run: dotnet swagger tofile --output ./swagger.json AzureIoTHub.Portal.Server/bin/Debug/net7.0/AzureIoTHub.Portal.Server.dll v1
-      working-directory: src/
-    
-    # Upload swagger docs to GitHub
-    - uses: actions/upload-artifact@v3
-      if: success()
-      with:
-        name: swagger-doc
-        path: ./src/swagger.json
+    - name: Install Chrome Driver
+      run: dotnet add package Selenium.WebDriver.ChromeDriver
+      working-directory: AzureIoTHub.Portal.Tests.E2E/ 
 
     - name: Run E2E tests
       run: dotnet test --no-build AzureIoTHub.Portal.Tests.E2E.csproj
