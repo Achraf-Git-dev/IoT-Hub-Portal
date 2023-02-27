@@ -1,0 +1,43 @@
+﻿@inject ISnackbar Snackbar
+@inject ILoRaWanConcentratorClientService LoRaWanConcentratorsClientService
+
+<MudDialog>
+    <DialogContent>
+        <p>Delete LoRaWAN Concentrator @deviceId ?</p>
+        <br />
+        <p><i>Warning : this cannot  be undone.</i></p>
+    </DialogContent>
+    <DialogActions>
+        <MudButton id="cancel-delete-concentrator" OnClick="Cancel">Cancel</MudButton>
+        <MudButton id="delete-concentrator" Color="Color.Primary" OnClick="DeleteDevice">Delete</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public Error Error {get; set;}
+    
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string deviceId { get; set; }
+    
+    void Cancel() => MudDialog.Cancel();
+
+    /// <summary>
+    /// Sends a POST request to the ConcentratorsController, to delete the device from the Azure IoT Hub
+    /// </summary>
+    /// <returns></returns>
+    private async Task DeleteDevice()
+    {
+        try
+        {
+            await LoRaWanConcentratorsClientService.DeleteConcentrator(deviceId);
+
+            Snackbar.Add($"Device {deviceId} has been successfully deleted!", Severity.Success);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (ProblemDetailsException exception)
+        {
+            Error?.ProcessProblemDetails(exception);
+        }
+    }
+}

@@ -1,0 +1,43 @@
+﻿#blazor-error-ui {
+    color: black;
+}
+
+#blazor-error-ui a {
+    color: black;
+}
+
+.validation-error-message {
+    color: var(--mud-palette-error) !important;
+    margin: 0;
+    font-size: .75rem;
+    text-align: start;
+    font-weight: 400;
+    line-height: 1.66;
+    letter-spacing: .03333em;
+}
+
+.scrollable-tab-content {
+    overflow-x: hidden;
+    height: calc(100vh - 270px);
+}
+
+#loading-bar .bar {
+    height: 4px !important;
+}
+
+#loading-bar .peg {
+    height: 4px !important;
+}
+#MudCardHeader {
+    white-space: nowrap;
+    overflow: scroll;
+}
+.DeviceCardHeader .mud-card-header-content {
+    display: inline-grid;
+}
+.overflow-ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+}
+

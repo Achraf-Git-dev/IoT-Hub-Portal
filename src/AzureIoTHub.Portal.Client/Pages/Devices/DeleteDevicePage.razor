@@ -1,0 +1,64 @@
+﻿@inject ISnackbar Snackbar
+@inject IDeviceClientService DeviceClientService
+@inject ILoRaWanDeviceClientService LoRaWanDeviceClientService
+
+<MudDialog>
+    <DialogContent>
+        <MudGrid>
+            <MudItem xs=12>
+                <MudText>
+                    Delete @deviceName ?
+                </MudText>
+            </MudItem>
+            <MudItem xs=12>
+                <MudText><i>Warning : this cannot  be undone.</i></MudText>
+            </MudItem>
+        </MudGrid>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton id="delete-device" Color="Color.Primary" OnClick="DeleteDevice">Delete</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public Error Error {get; set;}
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string deviceID { get; set; }
+    [Parameter] public string deviceName { get; set; }
+    [Parameter] public bool IsLoRaWan { get; set; }
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+
+    /// <summary>
+    /// Sends a POST request to the DevicesController, to delete the device from the Azure IoT Hub
+    /// </summary>
+    /// <returns></returns>
+    private async Task DeleteDevice()
+    {
+        try
+        {
+            if (IsLoRaWan)
+            {
+                await LoRaWanDeviceClientService.DeleteDevice(deviceID);
+            }
+            else
+            {
+                await DeviceClientService.DeleteDevice(deviceID);
+            }
+
+            Snackbar.Add($"Device {deviceName} has been successfully deleted!", Severity.Success);
+        }
+        catch (ProblemDetailsException exception)
+        {
+            Error?.ProcessProblemDetails(exception);
+        }
+        finally
+        {
+            MudDialog.Close();
+        }
+    }
+}

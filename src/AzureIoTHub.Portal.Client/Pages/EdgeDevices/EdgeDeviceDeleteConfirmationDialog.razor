@@ -1,0 +1,46 @@
+﻿@inject ISnackbar Snackbar
+@inject IEdgeDeviceClientService EdgeDeviceClientService
+
+<MudDialog>
+    <DialogContent>
+        <MudGrid>
+            <MudItem xs=12>
+                <MudText>
+                    Delete @DeviceId ?
+                </MudText>
+            </MudItem>
+            <MudItem xs=12>
+                <MudText><i>Warning : this cannot  be undone.</i></MudText>
+            </MudItem>
+        </MudGrid>
+    </DialogContent>
+    <DialogActions>
+        <MudButton id="cancel" OnClick="Cancel">Cancel</MudButton>
+        <MudButton id="delete" Color="Color.Primary" OnClick="DeleteDevice">Delete</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public Error Error {get; set;}
+    
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string DeviceId { get; set; }
+
+    void Cancel() => MudDialog.Cancel();
+
+    private async Task DeleteDevice()
+    {
+        try
+        {
+            await EdgeDeviceClientService.DeleteDevice(DeviceId);
+
+            Snackbar.Add($"Device {DeviceId} has been successfully deleted!", Severity.Success);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (ProblemDetailsException exception)
+        {
+            Error?.ProcessProblemDetails(exception);
+        }
+    }
+}
